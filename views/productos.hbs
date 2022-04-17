@@ -1,0 +1,103 @@
+<div class="container">
+
+  <div class="text-center m-5">
+    <hr />
+    <h1>{{Titulo}}</h1>
+    <hr />
+  </div>
+</div>
+
+<div class="container">
+  <div
+    id="carouselExampleControls"
+    class="carousel slide"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img
+          src="https://t1.ea.ltmcdn.com/es/posts/6/3/0/tipos_de_monturas_para_caballos_25036_orig.jpg"
+          class="d-block w-100"
+          alt="caballo1"
+        />
+      </div>
+      <div class="carousel-item">
+        <img
+          src="https://www.coats.com/-/media/Coats/End-Use/Household-and-Recreation/Equestrian-Saddles-and-Bridles/Household-and-recreation---sporting-goods--bridle-01.jpg?rev=-1&width=600&height=338&op=crop"
+          class="d-block w-100"
+          alt="caballo2"
+        />
+      </div>
+      <div class="carousel-item">
+        <img
+          src="https://www.curtisur.es/blog-guarnicioneria/wp-content/uploads/2018/04/Colocar-bien-la-Montura.jpg"
+          class="d-block w-100"
+          alt="caballo3"
+        />
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleControls"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleControls"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+{{! Mostramos los productos de la tabla realizada en mysql }}
+
+<div class="container">
+
+  <div class="text-center m-5">
+    <hr />
+    <h2>Lista de Productos</h2>
+    <hr />
+  </div>
+  <table class="table table-striped" id="mytable ">
+    <thead>
+      <tr>
+        <th>Prodcuto ID</th>
+        <th>Name</th>
+        <th>Precio</th>
+        <th>Descripcion</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each results}}
+        <tr>
+          <td>{{producto_id}}</td>
+          <td>{{producto_name}}</td>
+          <td>{{producto_precio}}</td>
+          <td>{{producto_descripcion}}</td>
+          <td>
+            <a
+              href="javascript:void(0);"
+              class="btn btn-info edit"
+              data-id="{{producto_id}}"
+              data-producto-name="{{producto_name}}"
+              data-producto-precio="{{producto_precio}}"
+            >Editar</a>
+            <a
+              href="javascript:void(0);"
+              class="btn btn-danger delete"
+              data-id="{{producto_id}}"
+            >Borrar</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
