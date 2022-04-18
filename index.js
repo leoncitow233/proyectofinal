@@ -1,26 +1,28 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const Port = process.env.Port || 8081;
+// const Port = process.env.Port || 8081;
+const Port = 3000 || 8080;
 const path = require("path");
 const hbs = require("hbs");
 
 // traemos la libreria de mysql para la conexion
+
 const mysql = require("mysql2");
 
 // creamos la configuracion de la conexion
-// const conexion = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "0840leoncito",
-//   database: "fullstack",
-// });
+const conexion = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "0840leoncito",
+  database: "fullstack",
+});
 
 // // conectamosa la DB
-// conexion.connect((error) => {
-//   if (error) throw error;
-//   console.log("Conexion a la DB exitosa!!!");
-// });
+conexion.connect((error) => {
+  if (error) throw error;
+  console.log("Conexion a la DB exitosa!!!");
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -34,10 +36,6 @@ hbs.registerPartials(path.join(__dirname, "views/partials"));
 
 app.get("/", (req, res) => {
   res.render("index", { Titulo: "Node.JS y Handlebars" });
-});
-
-app.get("/home", (req, res) => {
-  res.json({ Titulo: "Para que podamos hacer el deploy" });
 });
 
 app.get("/formulario", (req, res) => {
