@@ -38,6 +38,10 @@ app.get("/", (req, res) => {
   res.render("index", { Titulo: "Node.JS y Handlebars" });
 });
 
+app.get("/home", (req, res) => {
+  res.jason("index", { Titulo: "para que podamos hacer el deploy" });
+});
+
 app.get("/formulario", (req, res) => {
   res.render("formulario", { Titulo: "Formulario para completar" });
 });
