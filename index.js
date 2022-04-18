@@ -8,7 +8,7 @@ const hbs = require("hbs");
 
 // traemos la libreria de mysql para la conexion
 
-const mysql = require("mysql2");
+// const mysql = require("mysql2");
 
 // creamos la configuracion de la conexion
 // const conexion = mysql.createConnection({
@@ -36,6 +36,10 @@ hbs.registerPartials(path.join(__dirname, "views/partials"));
 
 app.get("/", (req, res) => {
   res.render("index", { Titulo: "Node.JS y Handlebars" });
+});
+
+app.get("/home", (req, res) => {
+  res.json({ Titulo: "deploy" });
 });
 
 app.get("/formulario", (req, res) => {
