@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
-  res.jason("index", { Titulo: "para que podamos hacer el deploy" });
+  res.json({ Titulo: "Para que podamos hacer el deploy" });
 });
 
 app.get("/formulario", (req, res) => {
