@@ -1,8 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-// const Port = process.env.Port || 8081;
-const Port = 3000 || 8080;
+const Port = process.env.Port || 8081;
 const path = require("path");
 const hbs = require("hbs");
 
@@ -11,18 +10,18 @@ const hbs = require("hbs");
 const mysql = require("mysql2");
 
 // creamos la configuracion de la conexion
-const conexion = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "0840leoncito",
-  database: "fullstack",
-});
+// const conexion = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "0840leoncito",
+//   database: "fullstack",
+// });
 
-// conectamosa la DB
-conexion.connect((error) => {
-  if (error) throw error;
-  console.log("Conexion a la DB exitosa!!!");
-});
+// // conectamosa la DB
+// conexion.connect((error) => {
+//   if (error) throw error;
+//   console.log("Conexion a la DB exitosa!!!");
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
