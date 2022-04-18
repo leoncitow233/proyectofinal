@@ -6,7 +6,6 @@ const path = require("path");
 const hbs = require("hbs");
 
 // traemos la libreria de mysql para la conexion
-
 const mysql = require("mysql2");
 
 // creamos la configuracion de la conexion
