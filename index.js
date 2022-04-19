@@ -85,10 +85,10 @@ app.get("/productos", (req, res) => {
 
 // conexion.end();
 
-app.listen(Port, () => {
-  console.log(`El servidor en el puerto ${Port}`);
-});
+// app.listen(Port, () => {
+//   console.log(`El servidor en el puerto ${Port}`);
+// });
 
-app.on("error", (error) => {
-  console.log(`Error en la ejecucion del servidor ${error}`);
-});
+// app.on("error", (error) => {
+//   console.log(`Error en la ejecucion del servidor ${error}`);
+// });
