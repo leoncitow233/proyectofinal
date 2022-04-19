@@ -8,21 +8,21 @@ const hbs = require("hbs");
 
 // traemos la libreria de mysql para la conexion
 
-// const mysql = require("mysql2");
+const mysql = require("mysql2");
 
 // creamos la configuracion de la conexion
-// const conexion = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "0840leoncito",
-//   database: "Proyecto_final",
-// });
+const conexion = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "0840leoncito",
+  database: "Proyecto_final",
+});
 
-// // // // conectamosa la DB
-// conexion.connect((error) => {
-//   if (error) throw error;
-//   console.log("Conexion a la DB exitosa!!!");
-// });
+// // // conectamosa la DB
+conexion.connect((error) => {
+  if (error) throw error;
+  console.log("Conexion a la DB exitosa!!!");
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -48,47 +48,47 @@ app.get("/productos", (req, res) => {
   res.render("productos", { Titulo: "Productos" });
 });
 
-// app.post("/contacto", (req, res) => {
-//   const { nombre, mail, apellido, comentario } = req.body;
+app.post("/contacto", (req, res) => {
+  const { nombre, mail, apellido, comentario } = req.body;
 
-//   if (nombre == "" || mail == "") {
-//     let validacion = "Faltan datos para completar";
+  if (nombre == "" || mail == "") {
+    let validacion = "Faltan datos para completar";
 
-//     res.render("contacto", {
-//       Titulo: "Formulario para completar",
-//       validacion,
-//     });
-//   } else {
-//     console.log(nombre);
-//     console.log(apellido);
-//     console.log(mail);
-//     console.log(comentario);
+    res.render("contacto", {
+      Titulo: "Formulario para completar",
+      validacion,
+    });
+  } else {
+    console.log(nombre);
+    console.log(apellido);
+    console.log(mail);
+    console.log(comentario);
 
-//     // insertar datos a la DB
-//     let data = {
-//       cliente_nombre: nombre,
-//       cliente_apellido: apellido,
-//       cliente_mail: mail,
-//       cliente_comentario: comentario,
-//     };
-//     let sql = "insert into clientes set ?";
-//     conexion.query(sql, data, (error, result) => {
-//       if (error) throw error;
-//       res.render("enviado", {
-//         Titulo: "Su comentario ha sido enviado con exito!",
-//         nombre,
-//         mail,
-//       });
-//     });
-//   }
-// });
+    // insertar datos a la DB
+    let data = {
+      cliente_nombre: nombre,
+      cliente_apellido: apellido,
+      cliente_mail: mail,
+      cliente_comentario: comentario,
+    };
+    let sql = "insert into clientes set ?";
+    conexion.query(sql, data, (error, result) => {
+      if (error) throw error;
+      res.render("enviado", {
+        Titulo: "Su comentario ha sido enviado con exito!",
+        nombre,
+        mail,
+      });
+    });
+  }
+});
 
 // conexion.end();
 
-// app.listen(Port, () => {
-//   console.log(`El servidor en el puerto ${Port}`);
-// });
+app.listen(Port, () => {
+  console.log(`El servidor en el puerto ${Port}`);
+});
 
-// app.on("error", (error) => {
-//   console.log(`Error en la ejecucion del servidor ${error}`);
-// });
+app.on("error", (error) => {
+  console.log(`Error en la ejecucion del servidor ${error}`);
+});
