@@ -8,7 +8,7 @@ const hbs = require("hbs");
 
 // traemos la libreria de mysql para la conexion
 
-const mysql = require("mysql2");
+// const mysql = require("mysql2");
 
 // creamos la configuracion de la conexion
 // const conexion = mysql.createConnection({
