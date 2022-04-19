@@ -8,21 +8,21 @@ const hbs = require("hbs");
 
 // traemos la libreria de mysql para la conexion
 
-// const mysql = require("mysql2");
+const mysql = require("mysql2");
 
 // creamos la configuracion de la conexion
-// const conexion = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "0840leoncito",
-//   database: "fullstack",
-// });
+const conexion = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "0840leoncito",
+  database: "Proyecto_final",
+});
 
 // // // conectamosa la DB
-// conexion.connect((error) => {
-//   if (error) throw error;
-//   console.log("Conexion a la DB exitosa!!!");
-// });
+conexion.connect((error) => {
+  if (error) throw error;
+  console.log("Conexion a la DB exitosa!!!");
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -38,117 +38,47 @@ app.get("/", (req, res) => {
   res.render("index", { Titulo: "Node.JS y Handlebars" });
 });
 
-app.get("/home", (req, res) => {
-  res.json({ Titulo: "deploy" });
+app.get("/contacto", (req, res) => {
+  res.render("contacto", {
+    Titulo: "Dejanos tu consulta y nos comunicaremos de inmediato",
+  });
 });
 
-app.get("/formulario", (req, res) => {
-  res.render("formulario", { Titulo: "Formulario para completar" });
+app.get("/productos", (req, res) => {
+  res.render("productos", { Titulo: "Productos" });
 });
 
-app.post("/formulario", (req, res) => {
-  const { name, precio, descripcion } = req.body;
+app.post("/contacto", (req, res) => {
+  const { nombre, mail, apellido, comentario } = req.body;
 
-  if (name == "" || precio == "") {
+  if (nombre == "" || mail == "") {
     let validacion = "Faltan datos para completar";
 
-    res.render("formulario", {
+    res.render("contacto", {
       Titulo: "Formulario para completar",
       validacion,
     });
   } else {
-    console.log(name);
-    console.log(precio);
-    console.log(descripcion);
+    console.log(nombre);
+    console.log(apellido);
+    console.log(mail);
+    console.log(comentario);
 
     // insertar datos a la DB
     let data = {
-      producto_name: name,
-      producto_precio: precio,
-      producto_descripcion: descripcion,
+      cliente_nombre: nombre,
+      cliente_apellido: apellido,
+      cliente_mail: mail,
+      cliente_comentario: comentario,
     };
-    let sql = "insert into productos set ?";
+    let sql = "insert into clientes set ?";
     conexion.query(sql, data, (error, result) => {
       if (error) throw error;
-      res.render("index", {
-        Titulo: "Bienvenidos a la app",
+      res.render("enviado", {
+        Titulo: "Su comentario ha sido enviado con exito!",
+        nombre,
+        mail,
       });
-    });
-  }
-});
-
-app.get("/productos", (req, res) => {
-  let sql = "SELECT * FROM productos";
-  conexion.query(sql, (error, results) => {
-    if (error) throw error;
-    res.render("productos", {
-      Titulo: "Productos",
-      results: results,
-    });
-  });
-});
-
-app.post("/update", (req, res) => {
-  console.log(req.body.producto_name);
-  console.log(req.body.producto_precio);
-  console.log(req.body.producto_id);
-  //   res.send({
-  //     producto: req.body.producto_name,
-  //     precio: req.body.producto_precio,
-  //   });
-
-  let sql =
-    "UPDATE productos SET producto_name='" +
-    req.body.producto_name +
-    "', producto_precio='" +
-    req.body.producto_precio +
-    "'WHERE producto_id" +
-    req.body.producto_id;
-
-  conexion.query(sql, (error, results) => {
-    if (error) throw error;
-    res.render("index", {
-      Titulo: "Bienvenidos a la app",
-    });
-  });
-});
-
-app.delete("/delete", (req, res) => {
-  console.log(req.body.producto_id);
-
-  //   res.send({
-  //     producto: req.body.producto_id,
-  //     message: "Producto borrador de la DB",
-  //   });
-  let sql =
-    "DELETE FROM productos WHERE producto_id=" + req.body.producto_id + "";
-  conexion.query(sql, (error, results) => {
-    if (error) throw error;
-    res.render("index", {
-      Titulo: "Bienvenidos a la app",
-    });
-  });
-});
-
-app.get("/contacto", (req, res) => {
-  res.render("contacto", { Titulo: "Escribenos" });
-});
-
-app.post("/contacto", (req, res) => {
-  const { name, email } = req.body;
-
-  if (name == "" || email == "") {
-    let validacion = "Faltan tus datos";
-
-    res.render("contacto", {
-      Titulo: "Escribenos",
-      validacion,
-    });
-  } else {
-    console.log(name);
-    console.log(email);
-    res.render("index", {
-      Titulo: "Bienvenidos a Miguel Acuña",
     });
   }
 });
