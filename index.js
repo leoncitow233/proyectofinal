@@ -10,6 +10,20 @@ const hbs = require("hbs");
 
 const mysql = require("mysql2");
 
+// creamos la configuracion de la conexion
+const conexion = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "0840leoncito",
+  database: "Proyecto_final",
+});
+
+// // // conectamosa la DB
+conexion.connect((error) => {
+  if (error) throw error;
+  console.log("Conexion a la DB exitosa!!!");
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -22,10 +36,6 @@ hbs.registerPartials(path.join(__dirname, "views/partials"));
 
 app.get("/", (req, res) => {
   res.render("index", { Titulo: "Node.JS y Handlebars" });
-});
-
-app.get("/home", (req, res) => {
-  res.render("home", { Titulo: "Node.JS y Handlebars" });
 });
 
 app.get("/contacto", (req, res) => {
