@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const Port = process.env.Port || 8081;
+const Port = process.env.PORT || 8081;
 // const Port = 3000 || 8080;
 const path = require("path");
 const hbs = require("hbs");
@@ -85,8 +85,8 @@ app.post("/contacto", (req, res) => {
 
 // conexion.end();
 
-app.listen(Port, () => {
-  console.log(`El servidor en el puerto ${Port}`);
+app.listen(PORT, () => {
+  console.log(`El servidor en el puerto ${PORT}`);
 });
 
 app.on("error", (error) => {
